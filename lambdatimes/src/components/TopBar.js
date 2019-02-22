@@ -76,7 +76,7 @@ const ContainerRight = styled.div`
   }
 `;
 
-const TopBar = ({ logOut }) => {
+const TopBar = ({ isLoggedIn, logIn, logOut }) => {
   return (
     <TopBarWrapper>
       <Container>
@@ -87,7 +87,7 @@ const TopBar = ({ logOut }) => {
           <span>GENERAL</span><span>BROWNBAG</span><span>RANDOM</span><span>MUSIC</span><span>ANNOUNCEMENTS</span>
         </ContainerCenter>
         <ContainerRight>
-          <span onClick={logOut}>LOG OUT</span>
+          <span onClick={logOut}>{isLoggedIn ? 'LOG OUT' : 'LOG IN'}</span>
         </ContainerRight>
       </Container>
     </TopBarWrapper>
@@ -95,6 +95,7 @@ const TopBar = ({ logOut }) => {
 }
 
 TopBar.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired,
   logOut: PropTypes.func.isRequired,
 }
 

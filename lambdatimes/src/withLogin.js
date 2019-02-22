@@ -10,7 +10,6 @@ const withLogin = (Component) => {
 
         componentDidMount() {
             if (persistedState) {
-                console.log(persistedState)
                 this.setState({ isLoggedIn: true });
             }
         }

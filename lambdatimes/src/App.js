@@ -15,7 +15,8 @@ const App = ({ isLoggedIn, logIn, logOut }) => {
         logOut={logOut} 
       />
       <Header />
-      <Content />
+      { !!isLoggedIn &&  <Content /> }
+     
     </div>
   );
 }
