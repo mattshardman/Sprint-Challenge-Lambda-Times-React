@@ -77,7 +77,6 @@ const ContainerRight = styled.div`
 `;
 
 const TopBar = ({ logOut }) => {
-  console.log(logOut)
   return (
     <TopBarWrapper>
       <Container>

@@ -26,7 +26,6 @@ const withLogin = (Component) => {
         }
 
         render() {
-            console.log(this.state)
             return (
                 <Component 
                     {...this.state} 
