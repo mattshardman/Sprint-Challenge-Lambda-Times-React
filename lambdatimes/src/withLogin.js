@@ -15,12 +15,28 @@ const app = initializeApp(config);
 const withLogin = (Component) => {
     return class WithLogin extends React.Component {
         state = {
-            user: {},
+            user: { name: '', photo: '' },
             isLoggedIn: false,
         }
 
-        loggedIn = async () => {
+        componentDidMount () {
+            auth().onAuthStateChanged((user) => {
+                if (user) {
+                  // User is signed in.
+                  this.setState({ 
+                    isLoggedIn: true, 
+                    user: {
+                        name: user.displayName,
+                        photo: user.photoURL
+                    }
+                })
+                } else {
+                  // No user is signed in.
+                }
+              });
+        }
 
+        loggedIn = async () => {
             const provider = new auth.GoogleAuthProvider();
             try {
                 const result = await auth().signInWithPopup(provider);              
@@ -42,6 +58,7 @@ const withLogin = (Component) => {
 
         logOut = () => {
             this.setState({ isLoggedIn: false });
+            auth().signOut()
         }
 
         render() {

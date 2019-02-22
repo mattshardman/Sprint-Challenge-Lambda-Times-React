@@ -7,7 +7,6 @@ import LoginModal from './components/LogInModal';
 import withLogin from './withLogin';
 
 const App = ({ user, isLoggedIn, loggedIn, logOut }) => {
-  console.log(user)
   return (
     <div className="App">
       { !isLoggedIn && <LoginModal loggedIn={loggedIn} /> }
@@ -24,7 +23,7 @@ const App = ({ user, isLoggedIn, loggedIn, logOut }) => {
 }
 
 App.propTypes = {
-  user: PropTypes.shape(PropTypes.string).isRequired,
+  user: PropTypes.shape({ name: PropTypes.string, photo: PropTypes.string }).isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
   loggedIn: PropTypes.func.isRequired,
   logOut: PropTypes.func.isRequired,

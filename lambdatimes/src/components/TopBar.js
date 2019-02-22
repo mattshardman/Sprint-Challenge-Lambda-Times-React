@@ -94,7 +94,6 @@ const AvatarImg = styled.img`
 `;
 
 const TopBar = ({ user, isLoggedIn, logIn, logOut }) => {
-  console.log(user)
   return (
     <TopBarWrapper>
       <Container>
@@ -118,7 +117,7 @@ const TopBar = ({ user, isLoggedIn, logIn, logOut }) => {
 }
 
 TopBar.propTypes = {
-  user: PropTypes.shape(PropTypes.string).isRequired,
+  user: PropTypes.shape({ name: PropTypes.string, photo: PropTypes.string }).isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
   logOut: PropTypes.func.isRequired,
 }
