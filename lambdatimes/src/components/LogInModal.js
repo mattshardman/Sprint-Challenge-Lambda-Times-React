@@ -3,18 +3,20 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const LoginWrapper = styled.div`
+    z-index: 100;
     position: fixed;
     height: 100vh;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(0,0,0,.7);
+    background: rgba(0,0,0,.8);
 `
 
 const LoginBox = styled.div`
-    height: 400px;
+    height: 250px;
     width: 400px;
+    border-radius: 10px;
     background: #fff;
     display: flex;
     justify-content: center;
@@ -28,16 +30,6 @@ const Header = styled.h1`
     font-size: 30px;
     margin: 0;
 `;
-
-const Form = styled.form`
-    margin-top: 40px;
-    height: 50%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-`
 
 const Input = styled.input`
     width: 80%;
@@ -53,36 +45,28 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
+    margin-top: 30px;
     width: 80%;
+    border-radius: 3px;
     height: 40px;
-    background: #3897f0;
+    background: #3b5998;
     color: #fff;
     font-size: 14px;
     border: none;
     cursor: pointer;
+    :hover {
+        background: #8b9dc3;
+    }
 `
 
-const LoginModal = ({logIn}) => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+const LoginModal = ({ loggedIn }) => {
+
     return (
         <LoginWrapper>
             <LoginBox>
                 <Header>Lambda Times Login</Header>
 
-                <Form onSubmit={(e) => logIn(e, username, password)}>
-                    <Input 
-                        type="text" 
-                        placeholder="Username" 
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-                    <Input 
-                        type="password" 
-                        placeholder="Password" 
-                        onChange={(e) => setPassword(e.target.value)} 
-                    />
-                    <Button>Log In</Button>
-                </Form>
+                <Button onClick={loggedIn}>Log In With FaceBook</Button>
             </LoginBox>
         </LoginWrapper>
     )

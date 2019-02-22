@@ -6,23 +6,27 @@ import Content from './components/Content/Content';
 import LoginModal from './components/LogInModal';
 import withLogin from './withLogin';
 
-const App = ({ isLoggedIn, logIn, logOut }) => {
+const App = ({ user, isLoggedIn, loggedIn, logOut }) => {
+  console.log(user)
   return (
     <div className="App">
-      { !isLoggedIn && <LoginModal logIn={logIn} /> }
+      { !isLoggedIn && <LoginModal loggedIn={loggedIn} /> }
       <TopBar 
+        user={user}
         isLoggedIn={isLoggedIn} 
         logOut={logOut} 
       />
       <Header />
-      <Content />
+      { !!isLoggedIn &&  <Content /> }
+     
     </div>
   );
 }
 
 App.propTypes = {
+  user: PropTypes.shape(PropTypes.string).isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
-  logIn: PropTypes.func.isRequired,
+  loggedIn: PropTypes.func.isRequired,
   logOut: PropTypes.func.isRequired,
 }
 
