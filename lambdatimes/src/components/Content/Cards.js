@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Card from './Card';
 
 const Cards = ({cards}) => {
-  console.log(cards)
   return (
     <div className="cards-container">
       {/* Using the cards prop, map over the list creating a 
