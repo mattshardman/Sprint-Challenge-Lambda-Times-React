@@ -1,35 +1,43 @@
 import React from 'react';
+import { auth } from 'firebase';
 
 const persistedState = localStorage.getItem('username');
 
 const withLogin = (Component) => {
     return class WithLogin extends React.Component {
         state = {
+            user: '',
             isLoggedIn: false,
         }
 
         componentDidMount() {
-            if (persistedState) {
-                this.setState({ isLoggedIn: true });
-            }
+           
+            
         }
 
-        logIn = (e, username, password) => {
-            this.setState({ isLoggedIn: true, username });
-            localStorage.setItem('username', username);
+        loggedIn = (user) => {
+           this.setState({ 
+                isLoggedIn: true, 
+                user: {
+                    name: user.displayName,
+                    
+                }
+            })
+              
         }
 
         logOut = () => {
             this.setState({ isLoggedIn: false });
-            localStorage.removeItem('username');
+            auth.signOut();
         }
 
         render() {
+            console.log(this.state)
             return (
                 <Component 
                     {...this.state} 
                     {...this.props} 
-                    logIn={this.logIn} 
+                    loggedIn={this.loggedIn} 
                     logOut={this.logOut} 
                 />
             )

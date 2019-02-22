@@ -2,7 +2,22 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import { auth, initializeApp } from 'firebase';
+
+
+const config = {
+    apiKey: "AIzaSyAf8efrlIdRFGF_aHj7m3yalnkgK8-qCsQ",
+    authDomain: "lambdanews-9c595.firebaseapp.com",
+    databaseURL: "https://lambdanews-9c595.firebaseio.com",
+    projectId: "lambdanews-9c595",
+    storageBucket: "lambdanews-9c595.appspot.com",
+    messagingSenderId: "682479032947"
+};
+
+const app = initializeApp(config);
+
 const LoginWrapper = styled.div`
+    z-index: 100;
     position: fixed;
     height: 100vh;
     width: 100%;
@@ -29,7 +44,7 @@ const Header = styled.h1`
     margin: 0;
 `;
 
-const Form = styled.form`
+const Form = styled.div`
     margin-top: 40px;
     height: 50%;
     width: 100%;
@@ -62,15 +77,32 @@ const Button = styled.button`
     cursor: pointer;
 `
 
-const LoginModal = ({logIn}) => {
+const LoginModal = ({ loggedIn }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
+    const logIn = async () => {
+        const provider = new auth.GoogleAuthProvider();
+            try {
+                const result = await auth().signInWithPopup(provider);
+                
+                const user  = await result.user
+
+                console.log(user)
+                await loggedIn(user)
+
+            } catch (e) {
+                console.log(e);
+            }
+           
+    }
+
     return (
         <LoginWrapper>
             <LoginBox>
                 <Header>Lambda Times Login</Header>
 
-                <Form onSubmit={(e) => logIn(e, username, password)}>
+                <Form>
                     <Input 
                         type="text" 
                         placeholder="Username" 
@@ -81,7 +113,7 @@ const LoginModal = ({logIn}) => {
                         placeholder="Password" 
                         onChange={(e) => setPassword(e.target.value)} 
                     />
-                    <Button>Log In</Button>
+                    <Button onClick={logIn}>Log In</Button>
                 </Form>
             </LoginBox>
         </LoginWrapper>
