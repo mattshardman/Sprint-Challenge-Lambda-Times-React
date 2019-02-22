@@ -46,10 +46,10 @@ const Input = styled.input`
 
 const Button = styled.button`
     margin-top: 30px;
-    width: 80%;
+    width: 70%;
     border-radius: 3px;
     height: 40px;
-    background: #3b5998;
+    background: #4885ed;
     color: #fff;
     font-size: 14px;
     border: none;
@@ -66,7 +66,13 @@ const LoginModal = ({ loggedIn }) => {
             <LoginBox>
                 <Header>Lambda Times Login</Header>
 
-                <Button onClick={loggedIn}>Log In With FaceBook</Button>
+                <Button onClick={loggedIn}>
+                <i 
+                    class="fab fa-google"
+                    style={{ marginRight: 20 }}
+                />
+                    Log In With Google
+                </Button>
             </LoginBox>
         </LoginWrapper>
     )
