@@ -76,7 +76,25 @@ const ContainerRight = styled.div`
   }
 `;
 
-const TopBar = ({ isLoggedIn, logIn, logOut }) => {
+const Avatar = styled.div`
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: red;
+  margin-right: 25px;
+  display: flex;
+`;
+
+const AvatarImg = styled.img`
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+`;
+
+const TopBar = ({ user, isLoggedIn, logIn, logOut }) => {
+  console.log(user)
   return (
     <TopBarWrapper>
       <Container>
@@ -87,6 +105,11 @@ const TopBar = ({ isLoggedIn, logIn, logOut }) => {
           <span>GENERAL</span><span>BROWNBAG</span><span>RANDOM</span><span>MUSIC</span><span>ANNOUNCEMENTS</span>
         </ContainerCenter>
         <ContainerRight>
+          {!!isLoggedIn && 
+          <Avatar>
+            <AvatarImg src={user.photo} alt="user"/>
+          </Avatar>
+          }
           <span onClick={logOut}>{isLoggedIn ? 'LOG OUT' : 'LOG IN'}</span>
         </ContainerRight>
       </Container>
@@ -95,6 +118,7 @@ const TopBar = ({ isLoggedIn, logIn, logOut }) => {
 }
 
 TopBar.propTypes = {
+  user: PropTypes.shape(PropTypes.string).isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
   logOut: PropTypes.func.isRequired,
 }

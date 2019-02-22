@@ -2,20 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { auth, initializeApp } from 'firebase';
-
-
-const config = {
-    apiKey: "AIzaSyAf8efrlIdRFGF_aHj7m3yalnkgK8-qCsQ",
-    authDomain: "lambdanews-9c595.firebaseapp.com",
-    databaseURL: "https://lambdanews-9c595.firebaseio.com",
-    projectId: "lambdanews-9c595",
-    storageBucket: "lambdanews-9c595.appspot.com",
-    messagingSenderId: "682479032947"
-};
-
-const app = initializeApp(config);
-
 const LoginWrapper = styled.div`
     z-index: 100;
     position: fixed;
@@ -28,8 +14,9 @@ const LoginWrapper = styled.div`
 `
 
 const LoginBox = styled.div`
-    height: 400px;
+    height: 250px;
     width: 400px;
+    border-radius: 10px;
     background: #fff;
     display: flex;
     justify-content: center;
@@ -43,16 +30,6 @@ const Header = styled.h1`
     font-size: 30px;
     margin: 0;
 `;
-
-const Form = styled.div`
-    margin-top: 40px;
-    height: 50%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-`
 
 const Input = styled.input`
     width: 80%;
@@ -68,53 +45,28 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
+    margin-top: 30px;
     width: 80%;
+    border-radius: 3px;
     height: 40px;
-    background: #3897f0;
+    background: #3b5998;
     color: #fff;
     font-size: 14px;
     border: none;
     cursor: pointer;
+    :hover {
+        background: #8b9dc3;
+    }
 `
 
 const LoginModal = ({ loggedIn }) => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-
-    const logIn = async () => {
-        const provider = new auth.GoogleAuthProvider();
-            try {
-                const result = await auth().signInWithPopup(provider);
-                
-                const user  = await result.user
-
-                console.log(user)
-                await loggedIn(user)
-
-            } catch (e) {
-                console.log(e);
-            }
-           
-    }
 
     return (
         <LoginWrapper>
             <LoginBox>
                 <Header>Lambda Times Login</Header>
 
-                <Form>
-                    <Input 
-                        type="text" 
-                        placeholder="Username" 
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-                    <Input 
-                        type="password" 
-                        placeholder="Password" 
-                        onChange={(e) => setPassword(e.target.value)} 
-                    />
-                    <Button onClick={logIn}>Log In</Button>
-                </Form>
+                <Button onClick={loggedIn}>Log In With FaceBook</Button>
             </LoginBox>
         </LoginWrapper>
     )

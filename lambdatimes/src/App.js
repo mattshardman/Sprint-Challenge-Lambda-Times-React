@@ -7,6 +7,7 @@ import LoginModal from './components/LogInModal';
 import withLogin from './withLogin';
 
 const App = ({ user, isLoggedIn, loggedIn, logOut }) => {
+  console.log(user)
   return (
     <div className="App">
       { !isLoggedIn && <LoginModal loggedIn={loggedIn} /> }
