@@ -1,16 +1,32 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import TopBar from './components/TopBar';
 import Header from './components/Header';
 import Content from './components/Content/Content';
+import LoginModal from './components/LogInModal';
+import withLogin from './withLogin';
 
-const App = () => {
+const App = ({ user, isLoggedIn, loggedIn, logOut }) => {
   return (
     <div className="App">
-      <TopBar />
+      { !isLoggedIn && <LoginModal loggedIn={loggedIn} /> }
+      <TopBar 
+        user={user}
+        isLoggedIn={isLoggedIn} 
+        logOut={logOut} 
+      />
       <Header />
-      <Content />
+      { !!isLoggedIn &&  <Content /> }
+     
     </div>
   );
 }
 
-export default App;
+App.propTypes = {
+  user: PropTypes.shape({ name: PropTypes.string, photo: PropTypes.string }).isRequired,
+  isLoggedIn: PropTypes.bool.isRequired,
+  loggedIn: PropTypes.func.isRequired,
+  logOut: PropTypes.func.isRequired,
+}
+
+export default withLogin(App);
