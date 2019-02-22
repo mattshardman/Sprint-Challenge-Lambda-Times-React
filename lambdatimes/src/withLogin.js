@@ -1,14 +1,7 @@
 import React from 'react';
 import { auth, initializeApp } from 'firebase';
 
-const config = {
-    apiKey: "AIzaSyAf8efrlIdRFGF_aHj7m3yalnkgK8-qCsQ",
-    authDomain: "lambdanews-9c595.firebaseapp.com",
-    databaseURL: "https://lambdanews-9c595.firebaseio.com",
-    projectId: "lambdanews-9c595",
-    storageBucket: "lambdanews-9c595.appspot.com",
-    messagingSenderId: "682479032947"
-};
+import { config } from './config';
 
 const app = initializeApp(config);
 
@@ -22,7 +15,6 @@ const withLogin = (Component) => {
         componentDidMount () {
             auth().onAuthStateChanged((user) => {
                 if (user) {
-                  // User is signed in.
                   this.setState({ 
                     isLoggedIn: true, 
                     user: {
@@ -30,8 +22,6 @@ const withLogin = (Component) => {
                         photo: user.photoURL
                     }
                 })
-                } else {
-                  // No user is signed in.
                 }
               });
         }
